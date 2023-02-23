@@ -1,0 +1,20 @@
+.homepage {
+	padding: 20px;
+}
+
+button {
+	border: none;
+	color: black;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	height: 50px;
+    width: 320px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(92.83deg, #cbb26a -1.61%, #fbf4a1 53.52%, #cbb26a 101.51%);
+	border-radius: 10px;
+    margin: 10px 0px;
+}

@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"lib": ["es5", "dom"],
+		"types": ["cypress", "@types/testing-library__cypress"],
+		"isolatedModules": false,
+		"allowJs": true,
+		"noEmit": true,
+		"jsx": "react",
+		"allowSyntheticDefaultImports": true
+	},
+	"include": ["./**/*.ts", "../src/**/*.ts"]
+}

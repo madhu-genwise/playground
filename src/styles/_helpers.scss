@@ -1,0 +1,320 @@
+.relative {
+    position: relative;
+  }
+  
+  .absolute {
+    position: absolute;
+  }
+  
+  .fixed {
+    position: fixed;
+  }
+  
+  .sticky {
+    position: sticky;
+  }
+  
+  .border-radius-inherit {
+    border-radius: inherit;
+  }
+  
+  .default-border-radius {
+    border-radius: 8px;
+  }
+  
+  .uppercase {
+    text-transform: uppercase;
+  }
+  
+  .lowercase {
+    text-transform: lowercase;
+  }
+  
+  .width-100 {
+    width: 100%;
+  }
+  
+  .width-75 {
+    width: 75%;
+  }
+  
+  .width-66 {
+    width: 66%;
+  }
+  
+  .width-50 {
+    width: 50%;
+  }
+  
+  .width-33 {
+    width: 33%;
+  }
+  
+  .width-25 {
+    width: 25%;
+  }
+  
+  .width-auto {
+    width: auto;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  .block {
+    display: block;
+  }
+  
+  .content-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .absolute-center {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+  }
+  
+  .wrapper {
+    background: $transparent-5;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .flex-inline {
+    display: inline-flex;
+  }
+  
+  .flex-column {
+    flex-direction: column;
+  }
+  
+  .flex-column-reverse {
+    flex-direction: column-reverse;
+  }
+  
+  .flex-row {
+    flex-direction: row;
+  }
+  
+  .flex-row-reverse {
+    flex-direction: row-reverse;
+  }
+  
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  
+  .flex-start {
+    align-items: start;
+  }
+  
+  .flex-center {
+    align-items: center;
+  }
+  
+  .flex-baseline {
+    align-items: baseline;
+  }
+  
+  .flex-stretch {
+    align-items: stretch;
+  }
+  
+  .flex-start {
+    align-items: flex-start;
+  }
+  
+  .flex-end {
+    align-items: flex-end;
+  }
+  
+  .flex-justify {
+    justify-content: space-between;
+  }
+  
+  .flex-space-around {
+    justify-content: space-around;
+  }
+  
+  .flex-justify-center {
+    justify-content: center;
+  }
+  
+  .flex-justify-end {
+    justify-content: flex-end;
+  }
+  
+  .flex-justify-start {
+    justify-content: flex-start;
+  }
+  
+  .flex-auto {
+    flex: 1 1 auto;
+    min-height: 0;
+    min-width: 0;
+  }
+  
+  .flex-grow {
+    flex: 1 0 auto;
+  }
+  
+  .flex-none {
+    flex: none;
+  }
+  
+  .flex-first {
+    order: -1;
+  }
+  
+  .flex-last {
+    order: 99999;
+  }
+  
+  .lg-flex-start {
+    align-items: flex-start;
+  }
+  
+  @for $i from 1 through 10 {
+    .flex-#{$i} {
+      flex: $i;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .lg-flex-center {
+      align-items: center;
+    }
+  
+    .lg-flex-nowrap {
+      flex-wrap: nowrap;
+    }
+  
+    .lg-text-left {
+      text-align: left;
+    }
+  }
+  
+  .comp-mb {
+    margin-bottom: $space-3;
+  }
+  
+  .overflow-x-auto {
+    overflow-x: auto;
+  }
+  
+  .overflow-y-auto {
+    overflow-y: auto;
+  }
+  
+  .overflow-hidden {
+    overflow: hidden;
+  }
+  
+  .overflow-auto {
+    overflow: auto;
+  }
+  
+  .overflow-x-scroll {
+    overflow-x: scroll;
+  }
+  
+  .overflow-y-scroll {
+    overflow-y: scroll;
+  }
+  
+  .overflow-scroll {
+    overflow: scroll;
+  }
+  
+  .border-box {
+    box-sizing: border-box;
+  }
+  
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  
+  .text-uppercase {
+    text-transform: uppercase;
+  }
+  
+  .word-break {
+    word-break: break-all;
+  }
+  
+  .underline {
+    text-decoration: underline;
+  }
+  
+  .no-underline {
+    text-decoration: none;
+  }
+  
+  .pointer-events-none {
+    pointer-events: none;
+  }
+  
+  .disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
+  .text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .text-nowrap {
+    white-space: nowrap;
+  }
+  
+  .list-style-none {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .badge-icon {
+    height: 10px;
+    width: 10px;
+  }
+  
+  .alert-icon {
+    height: 16px;
+    width: 16px;
+  }
+  
+  .print-area {
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px #ddd;
+    max-width: 500px;
+    position: fixed;
+    top: 50px;
+    width: 93vw;
+    z-index: 99999999;
+  }
+  
+  .print-area-background {
+    background: #fff;
+    bottom: 0;
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100vw;
+    z-index: 999999;
+  }

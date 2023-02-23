@@ -1,0 +1,23 @@
+{
+	"baseUrl": "http://localhost:3001",
+	"env": {
+		"mobileViewportWidthBreakpoint": 414,
+		"coverage": true
+	},
+	"viewportHeight": 1000,
+	"video": false,
+	"experimentalComponentTesting": true,
+	"componentFolder": "cypress/unit",
+	"reporter": "mochawesome",
+	"reporterOptions": {
+		"reportDir": "reports",
+		"overwrite": false,
+		"html": false,
+		"json": true,
+		"toConsole": false
+	},
+	"retries": {
+		"runMode": 2,
+		"openMode": 0
+	}
+}

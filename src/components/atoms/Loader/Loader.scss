@@ -1,0 +1,23 @@
+@import '../../../styles/colors.scss';
+
+.loader-container {
+    background-color: $white;
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 999999;
+  
+    .loader-content {
+      border-radius: 50%;
+      height: 90px;
+      width: 90px;
+  
+      .loader {
+        border-radius: 50%;
+        height: 90px;
+        width: 90px;
+      }
+    }
+  }

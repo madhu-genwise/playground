@@ -1,0 +1,112 @@
+{
+	"name": "careoclub-ui-boilerplate",
+	"version": "0.0.1",
+	"private": true,
+	"dependencies": {
+		"@commitlint/cli": "^11.0.0",
+		"@commitlint/config-conventional": "^11.0.0",
+		"@reduxjs/toolkit": "^1.5.0",
+		"@sentry/react": "^5.26.0",
+		"@sentry/tracing": "^5.26.0",
+		"@testing-library/jest-dom": "^5.11.4",
+		"@testing-library/react": "^11.1.0",
+		"@testing-library/user-event": "^12.1.10",
+		"@types/jest": "^26.0.15",
+		"@types/node": "^12.0.0",
+		"@types/react": "^18.0.0",
+		"@types/react-dom": "^18.0.0",
+		"@types/react-redux": "^7.1.11",
+		"@types/react-router-dom": "^5.1.6",
+		"@typescript-eslint/eslint-plugin": "^3.10.1",
+		"@typescript-eslint/parser": "^3.10.1",
+		"axios": "^0.21.0",
+		"env-cmd": "^10.1.0",
+		"eslint-config-prettier": "^6.11.0",
+		"eslint-plugin-prettier": "^3.1.4",
+		"husky": "^4.3.5",
+		"prettier": "^2.1.1",
+		"react": "^18.0.0",
+		"react-dom": "^18.0.0",
+		"react-redux": "^7.2.2",
+		"react-router-dom": "^5.2.0",
+		"react-scripts": "4.0.1",
+		"react-toastify": "^6.2.0",
+		"source-map-explorer": "^2.5.2",
+		"standard-version": "^9.0.0",
+		"typescript": "3.9",
+		"web-vitals": "^0.2.4",
+		"workbox-background-sync": "^5.1.4",
+		"workbox-broadcast-update": "^5.1.4",
+		"workbox-cacheable-response": "^5.1.4",
+		"workbox-cli": "^6.4.2",
+		"workbox-core": "^5.1.4",
+		"workbox-expiration": "^5.1.4",
+		"workbox-google-analytics": "^5.1.4",
+		"workbox-navigation-preload": "^5.1.4",
+		"workbox-precaching": "^5.1.4",
+		"workbox-range-requests": "^5.1.4",
+		"workbox-routing": "^5.1.4",
+		"workbox-strategies": "^5.1.4",
+		"workbox-streams": "^5.1.4"
+	},
+	"scripts": {
+		"pre-build": "node --experimental-modules scripts/pre-release.js",
+		"start": "react-scripts start",
+		"start:uat": "env-cmd -f .env.uat yarn start",
+		"start:prod": "env-cmd -f .env.production yarn start",
+		"build": "yarn pre-build && react-scripts build",
+		"build:uat": "yarn pre-build && env-cmd -f .env.uat react-scripts build",
+		"build:prod": "yarn pre-build && env-cmd -f .env.production react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"release": "standard-version",
+		"cy:open": "cypress open",
+		"analyze": "source-map-explorer 'build/static/js/*.js'",
+		"cy:start": "react-scripts -r @cypress/instrument-cra start",
+		"cy:run": "cypress run",
+		"cy:coverage:summary": "nyc report --reporter=json-summary --report-dir ./reports",
+		"cy:ci": "start-server-and-test 'yarn cy:start' http://localhost:3000 'yarn cy:run'",
+		"cy:clean": "rm -rf coverage && rm -rf reports && rm -rf .nyc_output",
+		"release:patch": "yarn run release -- --release-as patch",
+		"release:minor": "yarn run release -- --release-as minor",
+		"release:major": "yarn run release -- --release-as major",
+		"prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
+		"lint": "eslint src/ --ext .ts,.tsx",
+		"asset-test": "chmod +x scripts/pre-asset-check.sh && bash scripts/pre-asset-check.sh"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@cypress/instrument-cra": "^1.3.1",
+		"@octokit/rest": "^18.0.4",
+		"@testing-library/cypress": "^6.0.1",
+		"cypress": "^6.2.1",
+		"cypress-react-unit-test": "^4.11.2",
+		"mochawesome": "^6.1.1",
+		"mochawesome-merge": "^4.1.0",
+		"sass": "^1.54.5",
+		"standard-version": "^9.0.0",
+		"start-server-and-test": "^1.11.3"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "yarn run asset-test"
+		}
+	}
+}
