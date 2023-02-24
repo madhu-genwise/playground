@@ -13,6 +13,10 @@ const Home: React.FC = () => {
 		dispatch(fetchUserInfoApi());
 	}, [dispatch]);
 
+	const onAPICallFailure = useCallback(() => {
+		dispatch(fetchUserInfoApi(true));
+	}, [dispatch]);
+
 	const showLoader = () => {
 		nativeFunctions.showLoader({ message: 'Loading...' });
 		setTimeout(() => {
@@ -28,7 +32,8 @@ const Home: React.FC = () => {
 	return (
 		<div className="homepage">
 			<h1>{`Hello ${username ?? ''}!!`}</h1>
-			<button onClick={onAPICall}>Call User API</button>
+			<button onClick={onAPICall}>Call API success</button>
+			<button onClick={onAPICallFailure}>Call User API Failure</button>
 			<button onClick={showLoader}>Show Loader</button>
 			<button onClick={openCamera}>Open Camera</button>
 			<button onClick={() => nativeFunctions.shareViaWhatsapp('Hello dudes')}>Share Whatsapp</button>

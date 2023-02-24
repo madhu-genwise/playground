@@ -7,3 +7,6 @@ import { setUserInfoData } from 'slices/UserInfoSlice';
 
 export const UserInfoAPI = async (): Promise<IUserInfoResponse> =>
 	Get<IUserInfoResponse>(Constants.userInfo, setUserInfoData);
+
+export const UserInfoAPIFailure = async (): Promise<IUserInfoResponse> =>
+	Get<IUserInfoResponse>(Constants.userInfoFailure, setUserInfoData);

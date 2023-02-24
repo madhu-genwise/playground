@@ -6,10 +6,11 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import Toasty from 'components/atoms/Toasty';
 
 import { IUserInfoResponse } from 'types';
-import { UserInfoAPI } from 'api';
+import { UserInfoAPI, UserInfoAPIFailure } from 'api';
 import store from 'store';
 
 export const UserInfoApi = createAsyncThunk('api/UserInfo', UserInfoAPI);
+export const UserInfoFailureApi = createAsyncThunk('api/UserInfoFailure', UserInfoAPIFailure);
 
 const INITIAL_STATE = () => ({
 	loading: false,
@@ -71,15 +72,15 @@ export interface ISampleStates {
 }
 
 export const UserInfoSelector = (state: ISampleStates): any => {
-	return state[UserInfoSlice.name].data || {};
+	return state[UserInfoSlice.name] || {};
 };
 
 export const useUserInfo = (): any => useSelector(UserInfoSelector);
 
 export const fetchUserInfoApi =
-	() =>
+	(failure?: boolean) =>
 	async (dispatch: any): Promise<void> => {
-		await dispatch(UserInfoApi());
+		await dispatch(failure ? UserInfoFailureApi() : UserInfoApi());
 		return;
 	};
 

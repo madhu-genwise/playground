@@ -2,21 +2,19 @@
 export type IDispatcherType = any;
 
 export interface IError {
-	name: string;
-	message: string;
-	code: string;
-	stack: string;
-	data?: unknown;
+	status: string;
+	response_code: string;
+	response_message?: unknown;
 }
 
 export interface IAPIResponse<T> {
-	success: boolean;
-	status: boolean;
-	message: string;
-	data: T;
+	response_message: string;
+	payload: T;
+	status?: boolean;
+	response_code?: string;
+	meta?: any;
 }
 
 export interface IUserInfoResponse {
-	beneficiaryName?: string;
-	businessName?: string;
+	username?: string;
 }

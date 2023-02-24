@@ -16,4 +16,5 @@ export { COMMON_HEADERS, DEFAULT_INTERCEPTOR_CONFIG };
 
 export default {
 	userInfo: '/user',
+	userInfoFailure: '/userfailure',
 };

@@ -51,8 +51,8 @@ Request.interceptors.request.use(tokenHeaderInterceptor);
 Request.interceptors.response.use(undefined, onErrorInterceptor);
 
 const getOriginalData = (data: any) => {
-	const isObjectPayload = typeof data === 'object';
-	if (isObjectPayload) {
+	const isObjectclientPayload = typeof data === 'object';
+	if (isObjectclientPayload) {
 		const originalData = { ...data };
 		delete originalData['callback'];
 		delete originalData['hideLoader'];
@@ -61,35 +61,35 @@ const getOriginalData = (data: any) => {
 	return data;
 };
 
-const extractor = <T>(response: AxiosResponse<IAPIResponse<T>>, payload?: any) => {
-	!payload?.hideLoader && nativeHandshake.hideLoader();
-	const { data }: any = response;
-	if (!response.status) toast.error(data?.message || MESSAGE_CONSTANTS.SOMETHING_WRONG);
-	const finalData = data.data || data;
-	payload?.['callback']?.(finalData);
+const extractor = <T>(response: AxiosResponse<IAPIResponse<T>>, clientPayload?: any) => {
+	!clientPayload?.hideLoader && nativeHandshake.hideLoader();
+	const { payload, response_message }: any = response;
+	if (!payload) toast.error(response_message || MESSAGE_CONSTANTS.SOMETHING_WRONG);
+	const finalData = payload;
+	clientPayload?.['callback']?.(finalData);
 	return finalData;
 };
 
 const nativeExtractor = <T>(
 	response: AxiosResponse<IAPIResponse<T>>,
 	reducerActionCallback?: (data: any) => void,
-	payload?: any,
+	clientPayload?: any,
 ) => {
-	!payload?.hideLoader && nativeHandshake.hideLoader();
-	const { data, message }: any = response;
-	if (!response.status) toast.error(message || data?.message || MESSAGE_CONSTANTS.SOMETHING_WRONG);
+	!clientPayload?.hideLoader && nativeHandshake.hideLoader();
+	const { payload, response_message }: any = response;
+	if (!payload) toast.error(response_message || MESSAGE_CONSTANTS.SOMETHING_WRONG);
 	console.log({
-		payload,
+		clientPayload,
 		response,
 	});
-	payload?.['callback']?.(response);
-	reducerActionCallback && reducerActionCallback(response);
+	clientPayload?.['callback']?.(payload);
+	reducerActionCallback && reducerActionCallback(payload);
 };
 
 const nativeApiCall = (
 	method: string,
 	path: string,
-	payload?: any,
+	clientPayload?: any,
 	reducerActionCallback?: (data: any) => void,
 ): any => {
 	return nativeHandshake
@@ -98,11 +98,11 @@ const nativeApiCall = (
 			method,
 			path,
 			token: 'adasdasdadasd',
-			...(method === 'POST' && { body: { data: getOriginalData(payload) } }),
-			...(method === 'GET' && { queries: getOriginalData(payload) }),
+			...(method === 'POST' && { body: { data: getOriginalData(clientPayload) } }),
+			...(method === 'GET' && { queries: getOriginalData(clientPayload) }),
 		})
 		.then((data: any) => {
-			nativeExtractor(data.body, reducerActionCallback, payload);
+			nativeExtractor(data.body, reducerActionCallback, clientPayload);
 		})
 		.catch((error: any) => {
 			if (error?.status_code === 401) {
@@ -131,32 +131,32 @@ export const Get = <T>(
 
 export const Post = <T>(
 	path: string,
-	payload: any,
+	clientPayload: any,
 	reducerActionCallback?: any,
 	cancelToken?: CancelToken,
 ): Promise<T> => {
-	!payload?.hideLoader && nativeHandshake.showLoader(GLOBAL_CONSTANTS.loaderDetails);
+	!clientPayload?.hideLoader && nativeHandshake.showLoader(GLOBAL_CONSTANTS.loaderDetails);
 	return env === 'development'
 		? Request.post<IAPIResponse<T>>(
 				path,
-				{ data: getOriginalData(payload) },
+				{ data: getOriginalData(clientPayload) },
 				{
 					cancelToken,
 				},
-		  ).then((data) => extractor(data, payload))
-		: nativeApiCall('POST', path, payload, reducerActionCallback);
+		  ).then((data) => extractor(data, clientPayload))
+		: nativeApiCall('POST', path, clientPayload, reducerActionCallback);
 };
 
 export const Put = <T>(
 	path: string,
-	payload: any,
+	clientPayload: any,
 	reducerActionCallback?: any,
 	cancelToken?: CancelToken,
 ): Promise<T> => {
-	!payload?.hideLoader && nativeHandshake.showLoader(GLOBAL_CONSTANTS.loaderDetails);
+	!clientPayload?.hideLoader && nativeHandshake.showLoader(GLOBAL_CONSTANTS.loaderDetails);
 	return env === 'development'
-		? Request.put<IAPIResponse<T>>(path, getOriginalData(payload), {
+		? Request.put<IAPIResponse<T>>(path, getOriginalData(clientPayload), {
 				cancelToken,
-		  }).then((data) => extractor(data, payload))
-		: nativeApiCall('PUT', path, payload, reducerActionCallback);
+		  }).then((data) => extractor(data, clientPayload))
+		: nativeApiCall('PUT', path, clientPayload, reducerActionCallback);
 };
