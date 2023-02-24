@@ -64,7 +64,7 @@ const getOriginalData = (data: any) => {
 const extractor = <T>(response: AxiosResponse<IAPIResponse<T>>, payload?: any) => {
 	!payload?.hideLoader && nativeHandshake.hideLoader();
 	const { data }: any = response;
-	if (response.status !== 200) toast.error(data?.message || MESSAGE_CONSTANTS.SOMETHING_WRONG);
+	if (!response.status) toast.error(data?.message || MESSAGE_CONSTANTS.SOMETHING_WRONG);
 	const finalData = data.data || data;
 	payload?.['callback']?.(finalData);
 	return finalData;
@@ -76,8 +76,8 @@ const nativeExtractor = <T>(
 	payload?: any,
 ) => {
 	!payload?.hideLoader && nativeHandshake.hideLoader();
-	const { statusCode, data, message }: any = response;
-	if (statusCode !== 200) toast.error(message || data?.message || MESSAGE_CONSTANTS.SOMETHING_WRONG);
+	const { data, message }: any = response;
+	if (!response.status) toast.error(message || data?.message || MESSAGE_CONSTANTS.SOMETHING_WRONG);
 	console.log({
 		payload,
 		response,
